@@ -88,20 +88,51 @@ public class Day10{
         // System.out.println(c);
         // System.out.println(date.length);
 
-        String str = "12a45";
-        System.out.println(isAllNumber(str));   //输出false
+        // String str = "12a45";
+        // System.out.println(isAllNumber(str));   //输出false
+        
+        //字符串的替换
+        // String str = "hb";
+        // str = str.replace("h", "*");   //h和*一定要加双引号啊，还有这个方法的返回值类型是String，所以得赋值;
+        // System.out.println(str);
+
+        //字符串的拆分
+        //public String[] split(String regex)   将字符串全部拆分
+        //public String[] split(String regex, int limit)    将字符串按照指定格式拆分为limit个子字符串
+        // String str = "i love you";
+        // String[] result = str.split(" ");
+        // for (String str1 : result){
+        //     System.out.print(str1+"、");
+        // }
+        //拆一个Ip地址
+        // String str = "127.0.0.1";
+        // String[] result = str.split("\\.");   //.在Java中代表方法运用，有特殊意义，必须加上转义字符，//而不是一个/
+        // for(String str1 : result){
+        //     System.out.print(str1+" ");
+        // }
+
+        
+        //将字符串首字母大写
+        // String str = "i love you";
+        // System.out.println(upperCaseFirstChar(str));
+
 
     }
 
     //判断一个字符串是否全部由数字组成⭐important!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    public static boolean isAllNumber(String str){
-        char[] date = str.toCharArray();
-        for (int i = 0; i < date.length; i++) {
-            char c = date[i];
-            if (c < '0' || c > '9') {
-                return false;
-            }
-        }
-        return true;
-    }
+    // public static boolean isAllNumber(String str){
+    //     char[] date = str.toCharArray();
+    //     for (int i = 0; i < date.length; i++) {
+    //         char c = date[i];
+    //         if (c < '0' || c > '9') {
+    //             return false;
+    //         }
+    //     }
+    //     return true;
+    // }
+
+    //将一个字符串首字母大写 ⭐！！！！！！！！！！！！！
+    // public static String upperCaseFirstChar(String str) {
+    //     return str.substring(0,1).toUpperCase() + str.substring(1);
+    // }
 }
