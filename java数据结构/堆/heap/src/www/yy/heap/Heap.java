@@ -36,8 +36,9 @@ public class Heap<E> {
         size = elementData.length;
         //最后一个非叶子节点的下标
         int index = (arr.length-2) / 2;
-        while(index-- >= 0) {
+        while(index >= 0) {
             shiftDown(index);
+            index--;
         }
     }
 

@@ -21,6 +21,6 @@ public class TestHeap {
         //要使用这个构造方法时，必须使用Integer数组，而不是int型数组
         Heap<Integer> heap = new Heap<>(arr);
         System.out.println(heap);
-
+//62、41、30、28、16、22、13、19、17、15、
     }
 }
