@@ -8,11 +8,14 @@
 
   <!--配置前端控制器-->
   <servlet>
+      <!--名字随便起-->
     <servlet-name>springmvc</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>classpath:applicationContext*.xml</param-value>
+        <!--如果有多个Spring配置文件，这里可以写成：applicationContext-*.xml-->
+        <!--前提是你的配置文件都是applicationContext-XXXX的格式-->
+      <param-value>classpath:applicationContext.xml</param-value>
     </init-param>
   </servlet>
 

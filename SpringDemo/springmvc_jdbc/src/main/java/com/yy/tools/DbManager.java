@@ -10,17 +10,18 @@ import java.util.Properties;
  * @Time : Created in 17:18 2019/8/7
  */
 public class DbManager {
-    private String username = "root";
-    private String password = "yangyun199969";
-    private String driver = "com.mysql.jdbc.Driver";
-    private String url = "jdbc:mysql://localhost:3306/jdbc";
     Connection connection;
 
     public DbManager() {
 
     }
     public Connection getConnection() {
+        Properties properties = Utils.getProperties("db.properties");
         try {
+            String driver = properties.getProperty("jdbc.driver");
+            String url = properties.getProperty("jdbc.url");
+            String username = properties.getProperty("jdbc.username");
+            String password = properties.getProperty("jdbc.password");
             Class.forName(driver);
             this.connection = DriverManager.getConnection(url,username,password);
 
@@ -34,6 +35,7 @@ public class DbManager {
     public ResultSet getQueryResultSet(String sql) {
         ResultSet resultSet = null;
         try {
+            Connection connection = getConnection();
             Statement statement = connection.createStatement();
             resultSet = statement.executeQuery(sql);
         } catch (SQLException e) {
