@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+    <!--
+    id: 标签块名，代表整个标签块，用它来找到这个标签
+    parameterType：你要输入的参数的类型，比如下面的查询语句是根据id号来查找，id是一个int型，所以填int型
+    resultType：返回的结果类型，我们自己创建了数据库表的对应类，这里返回的查询结果会将它封装成我们定义的类
+    #{}：当parameterType为int型时，里面可以随便起名字，但为其他类型时，必须为value，所以建议直接写value，
+    其实这就是一个占位符，我们输入的参数会替代它
+    ${}:拼接字符串
+    -->
+<!--
+    mapper标签的属性namespace必须要存在（自己在“”内添加）
+    原因是：mapper包下不止是一个xml文件，有了namespace，能更好的区分
+-->
+
+<mapper namespace="com.yy.mapper.IuserMapper">
+
+<select id="queryUserById" parameterType="int" resultType="com.yy.po.User">
+        select * from user where userid = #{value}
+    </select>
+
+</mapper>
