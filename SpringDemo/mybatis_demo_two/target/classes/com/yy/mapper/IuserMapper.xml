@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+    映射【类***表】 【属性***字段（列）】
+    parameterType : 输入映射
+    parameterMap: 自定义输入映射
+
+    resultType: 输出映射
+    resultMap: 自定义输出映射
+-->
+
+    <!--
+    id: 标签块名，代表整个标签块，用它来找到这个标签
+    parameterType：你要输入的参数的类型，比如下面的查询语句是根据id号来查找，id是一个int型，所以填int型
+    resultType：返回的结果类型，我们自己创建了数据库表的对应类，这里返回的查询结果会将它封装成我们定义的类
+    #{}：当parameterType为int型时，里面可以随便起名字，但为其他类型时，必须为value，所以建议直接写value，
+    其实这就是一个占位符，我们输入的参数会替代它
+    ${}:拼接字符串
+    -->
+<!--
+    mapper标签的属性namespace必须要存在（自己在“”内添加）
+    原因是：mapper包下不止是一个xml文件，有了namespace，能更好的区分
+-->
+
+<mapper namespace="com.yy.mapper.IuserMapper">
+
+    <!--我们传入的参数是com.yy.pack.UserPack，所以这里一定是写userEx，因为userEx是这个类的属性，而不是写UserEx-->
+    <!--注意这里的if语句块的包含关系，不要混淆-->
+    <sql id="mySQL">
+        <if test="userEx != null">
+            <if test="userEx.sex != null">
+                and sex = #{userEx.sex}
+            </if>
+            <if test="userEx.username != null">
+                and username like '%${userEx.username}%'
+            </if>
+        </if>
+
+        <if test="userIdList != null">
+            <foreach collection="userIdList" item="curVal" open="and (" close=")" separator="or">
+                id = #{curVal}
+            </foreach>
+        </if>
+    </sql>
+
+    <select id="queryUserBySN" parameterType="com.yy.pack.UserPack" resultType="com.yy.po.UserEx">
+        select * from user
+        <where>
+            <include refid="mySQL"/>
+        </where>
+    </select>
+
+    <select id="queryUserBySN_one" parameterType="com.yy.pack.UserPack"  resultType="com.yy.po.UserEx">
+        select * from user
+        where
+        sex = #{userEx.sex} and username like '%${userEx.username}'
+    </select>
+
+
+    <select id="queryUserCount" parameterType="com.yy.pack.UserPack" resultType="int">
+        select count(*) from user
+        <where>
+            <include refid="mySQL"/>
+        </where>
+    </select>
+
+
+    <resultMap id="queryUserByAliasMap" type="com.yy.po.User">
+        <id column="myId" property="id"/>
+        <result column="myName" property="username"/>
+        <result column="mySex" property="sex"/>
+    </resultMap>
+    <!--通过别名来进行查找,但注意打印出来的还是原来的样式，别名只存在于这个xml文件中-->
+    <select id="queryUserByAlias_two" resultMap="queryUserByAliasMap">
+        select
+          id as myId,username as myName, sex as mySex
+        from user
+    </select>
+
+    <select id="queryUserByMultyIds" parameterType="com.yy.pack.UserPack" resultType="com.yy.po.User">
+        select * from
+        user
+        <where>
+            <include refid="mySQL"/>
+        </where>
+    </select>
+
+</mapper>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!--
+    namespace is must be established
+    mapper标签的属性namespace必须要存在（自己在“”内添加）
+    原因是：mapper包下不止是一个xml文件，有了namespace，能更好的区分
+-->
+<mapper namespace="com.yy.mapper.OrdersMapper">
+
+    <select id="queryOrdersToUser" resultType="com.yy.po.OrdersEx">
+        select
+        orders.*, user.username, user.sex
+        from
+        orders, user
+        where orders.user_id = user.id
+    </select>
+
+
+</mapper>
