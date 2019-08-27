@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+<!--这里面是用来配置和数据库相关的
+    作用一：driver username password url
+    作用二：用来管理mapper文件的
+    但现在mybatis要结合Spring，所以这些工作就会交给Spring，所以这个文件没啥用,
+    ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
+    但不能删，因为这里面有头文件信息啊，在applicationContext-mapper中会引用这个文件的
+    ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
+-->
+</configuration>
